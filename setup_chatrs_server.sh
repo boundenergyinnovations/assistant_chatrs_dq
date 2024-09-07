@@ -41,6 +41,9 @@ sudo nginx -t
 # Reload Nginx to apply changes
 sudo systemctl reload nginx
 
+mkdir chatrs
+cd chatrs
+
 wget -O Cargo.toml https://raw.githubusercontent.com/boundenergyinnovations/assistant_chatrs_dq/main/Cargo.toml
 mkdir src
 cd src
