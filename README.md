@@ -19,7 +19,7 @@ We are using the server for our site: https://boundenergyinnovations.com
 
 
 ## Installation
-NEED: AWS account, OpenAI account, api key, assistant id. If using Google Sheets version: gsheet id, gsheet json cred file eg. chatsheet-xxxxxx-xxxxxxx.json,
+NEED: AWS account or VM/VPS, OpenAI account, api key, assistant id. Tested and implemented on Ubuntu.
 
 Start EC2/server with Ubuntu and settings for access to public HTTP/HTTPS, will need to set networking/VPC <-- video incomming.  
 
