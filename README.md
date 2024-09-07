@@ -6,7 +6,8 @@
 4. [Contributing](#contributing)
 
 ## Introduction
-The Concept: Imagine this: instead of navigating through a complex website trying to locate the information you need, you can simply watch a video that explains everything about the business. And if you have any questions? There's a chat feature ready to provide instant answers. No more digging through menus or struggling to find what you're looking for—just straightforward, easy access to the information you need.
+The Concept:  
+Imagine this: instead of navigating through a complex website trying to locate the information you need, you can simply watch a video that explains everything about the business. And if you have any questions? There's a chat feature ready to provide instant answers. No more digging through menus or struggling to find what you're looking for—just straightforward, easy access to the information you need.
 
 Now, here's where it gets even more interesting. Whether you're on your laptop, tablet, or phone, you can use a simple curl command (or any code you're comfortable with) to interact directly with the site’s agent. This means you can pull information or perform actions on the site from any terminal, on any device, without the hassle of complex inputs or web scraping.
 
