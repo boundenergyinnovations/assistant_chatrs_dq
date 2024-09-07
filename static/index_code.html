@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Chat Bot with Markdown and YouTube Videos</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #000;
+            color: #0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .terminal {
+            background-color: #000;
+            border: 2px solid #0f0;
+            padding: 20px;
+            width: 90%;
+            max-width: 1000px;
+        }
+        .ascii-border {
+            white-space: pre;
+            font-size: 16px;
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+        #chat-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        #chat-messages {
+            flex-grow: 1;
+            overflow-y: auto;
+            margin-bottom: 10px;
+            max-height: 400px;
+        }
+        #loading-indicator {
+            display: none;
+            text-align: center;
+        }
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #0f0;
+            border-top: 2px solid #000;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        input {
+            background-color: #000;
+            color: #0f0;
+            border: 1px solid #0f0;
+            padding: 5px;
+            width: calc(100% - 70px);
+            margin-bottom: 6px;
+        }
+        button {
+            background-color: #000;
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            padding: 10px 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background-color: #00ff00;
+            color: #000;
+        }
+        button:active {
+            transform: scale(0.98);
+        }
+        #videoPlayer {
+            width: 100%;
+            max-width: 640px;
+            height: 360px;
+            background-color: #111;
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .blockit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .blockit > * {
+            margin: 5px 0;
+        }
+
+.nav-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.nav-menu {
+    display: none;
+    background-color: #000;
+    color: #00ff00;
+    border: 1px solid #00ff00;
+    padding: 10px 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    /* display: none;
+    background-color: #f8f8f8;
+    padding: 20px;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+    width: 200px; */
+}
+
+.nav-section {
+    margin-bottom: 20px;
+}
+
+.nav-section h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.nav-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.nav-section ul li {
+    margin-bottom: 10px;
+}
+
+.nav-section ul li a {
+    background-color: #000;
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            padding: 10px 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+}
+
+.nav-section ul li a:hover {
+    background-color: #00ff00;
+    color: #000;
+}
+
+    </style>
+</head>
+<body>
+    <div class="terminal">
+        <div class="ascii-border">
++-----------------------------+
+|  chatrs_dq (Direct Query)   |
++-----------------------------+
+        </div>
+        <div style="display: inline-block;">
+        <button id="navButton" class="nav-button">nav::btn</button>
+        <nav id="navMenu" class="nav-menu">
+            <div class="nav-section">
+                <h3>🔗</h3>
+                <ul>
+                    <li><a href="index.html">B/B Mode</a></li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <h3>🔗</h3>
+                <ul>
+                    <li><a href="https://github.com/boundenergyinnovations/">Github Repos</a></li>
+                </ul>
+            </div>
+            <!-- <div class="nav-section">
+                <h3>🔗</h3>
+                <ul>
+                    <li><a href="#">Link 7</a></li>
+                </ul>
+            </div> -->
+        </nav>
+        <button id="suggest-topic" onclick="window.location.href='#user-input';">📝 Message <sub>Type Below</sub> 👇</button>
+    </div>
+
+        <!-- <button onclick="window.location.href='#navinav';">
+            nav::below
+        </button> -->
+        <div id=><p>### 😃 Welcome!!<br><br>
+        
+            Light. Speed. Ahead.<br>
+    
+            We are:<br>
+            - Small<br>
+            - Fast<br><br>
+
+        The Concept:
+
+        Imagine this: instead of navigating through a complex website trying to locate the information you need, you can simply watch a video that explains everything about the business. And if you have any questions? There's a chat feature ready to provide instant answers. No more digging through menus or struggling to find what you're looking for—just straightforward, easy access to the information you need.
+            <br><br>
+        Now, here's where it gets even more interesting. Whether you're on your laptop, tablet, or phone, you can use a simple curl command (or any code you're comfortable with) to interact directly with the site’s agent. This means you can pull information or perform actions on the site from any terminal, on any device, without the hassle of complex inputs or web scraping.
+            <br><br>
+        We believe that personal agents are the future. By calling a site's API directly, you can get the answers you need or interact with the site in the fastest, most cost-effective way possible. It's all about cutting out the unnecessary steps and giving you direct access to what you need, when you need it. Simple. Efficient. Powerful.
+            <br><br><br>
+        Explore our services👇 Always trying to improve, comments welcome.<br>
+        </p>
+            <p style="text-align: center;">+----------+</p>
+            
+            </p>           
+        </div>
+        
+        <div id="chat-container">
+            <div id="chat-messages"></div>
+            
+            <div id="loading-indicator">
+                Retrieving info - stand by...
+                <div class="spinner"></div>
+            </div>
+            
+            <div>
+                <input type="text" id="user-input" placeholder="Input anything you want to know...">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+
+        <div id="videoPlayer"></div>
+
+        <div class="button-container">
+            <button onclick="loadVideo('dQw4w9WgXcQ')">LOAD_01.YT</button>
+            <button onclick="loadVideo('jNQXAC9IVRw')">LOAD_02.YT</button>
+            <button onclick="loadVideo('kJQP7kiw5Fk')">LOAD_03.YT</button>
+            <button onclick="loadVideo('9bZkp7q19f0')">LOAD_04.YT</button>
+        </div>
+        
+        <div class="ascii-border">
++-----------------------+
+|  END OF TRANSMISSION  |
++-----------------------+
+        </div>
+        <div id="navinav" class="blockit">
+            mod nav {
+                    <div>
+            <button onclick="window.location.href='https://boundenergyinnovations.com';">
+                bei
+            </button><br>
+        }  
+        </div>
+    </div>
+
+    <script>
+        const chatMessages = document.getElementById('chat-messages');
+        const userInput = document.getElementById('user-input');
+        const loadingIndicator = document.getElementById('loading-indicator');
+        const converter = new showdown.Converter();
+
+        async function sendMessage() {
+            const message = userInput.value.trim();
+            if (message === '') return;
+
+            // Add user message to chat
+            addMessage('User', message);
+            userInput.value = '';
+
+            // Show loading indicator
+            loadingIndicator.style.display = 'block';
+
+            try {
+                const response = await fetch('/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ message }),
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const data = await response.json();
+                addMessage('Bot', data.response, true);
+            } catch (error) {
+                console.error('Error:', error);
+                addMessage('Bot', 'Sorry, there was an error processing your request.');
+            } finally {
+                // Hide loading indicator
+                loadingIndicator.style.display = 'none';
+            }
+        }
+
+        function addMessage(sender, content, isMarkdown = false) {
+            const messageElement = document.createElement('div');
+            let formattedContent = content;
+            
+            if (isMarkdown) {
+                formattedContent = converter.makeHtml(content);
+            }
+            
+            messageElement.innerHTML = `<strong>${sender}:</strong> ${formattedContent}`;
+            chatMessages.appendChild(messageElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function loadVideo(videoId) {
+            const videoPlayer = document.getElementById('videoPlayer');
+            videoPlayer.innerHTML = `
+                <iframe width="100%" height="100%" 
+                        src="https://www.youtube.com/embed/${videoId}" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                </iframe>
+            `;
+        }
+
+        // Allow sending message with Enter key
+        userInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Initialize with a default video
+        loadVideo('dQw4w9WgXcQ');
+    </script>
+    <script>
+    document.getElementById('navButton').addEventListener('click', function() {
+        var navMenu = document.getElementById('navMenu');
+        if (navMenu.style.display === 'block') {
+            navMenu.style.display = 'none';
+        } else {
+            navMenu.style.display = 'block';
+        }
+    });
+
+    </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const suggestTopicBtn = document.getElementById('suggest-topic');
+
+    function suggestTopic() {
+        userInput.value = '!msg Include any contact info: ';
+    }
+        
+    suggestTopicBtn.addEventListener('click', suggestTopic);
+});
+    </script>
+</body>
+</html>

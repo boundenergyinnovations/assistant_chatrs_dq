@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chatrs_dq</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app" class="p-4">
+        <div class="flex justify-between items-center mb-4">
+            <div class="flex items-center">
+                <!-- logo image here -->
+                <!-- <h1><img style="
+                    width: 160px; 
+                    height: 160px;     
+                    border-radius: 77px;
+                    overflow: hidden;
+                    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);" src="image.jpg"> -->
+                    <h1>
+                    <svg width="100" height="100" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Chatbot representation (speech bubble) -->
+                        <rect x="20" y="20" width="160" height="120" rx="20" ry="20" fill="#4A90E2" />
+                        <polygon points="50,140 80,160 80,140" fill="#4A90E2" />
+                        
+                        <!-- API representation (curly braces with space between) -->
+                        <text x="50" y="110" font-family="monospace" font-size="60" fill="white">{</text>
+                        <text x="130" y="110" font-family="monospace" font-size="60" fill="white">}</text>
+                    </svg>
+
+                    chatrs_dq (Direct Query)
+                </h1>
+                <!-- <h1 class="text-2xl font-bold">BearBiz</h1> -->
+            </div>
+            <div id="mood-indicator" class="text-4xl">😊</div>
+        </div>
+        
+        <div class="flex space-x-2 mb-4">
+            <button class="code_btn" onclick="window.location.href='index_code.html';">
+                📟 Code Mode
+            </button>
+            <button id="change-mood" class="btn">😃 Change Mood</button>
+            <button id="suggest-topic" class="btn" onclick="window.location.href='#message-input';">📝 Contact <sub>Type Below</sub> 👇</button>
+            <button id="toggle-dark-mode" class="btn">🎨 B/B Toggle</button>
+        </div>
+
+        <div><p>### 😃 Welcome!!<br><br>
+        
+            Light. Speed. Ahead.<br>
+    
+            We are:<br>
+            - Small<br>
+            - Fast<br><br>
+    
+            The Concept:
+    
+            Imagine this: instead of navigating through a complex website trying to locate the information you need, you can simply watch a video that explains everything about the business. And if you have any questions? There's a chat feature ready to provide instant answers. No more digging through menus or struggling to find what you're looking for—just straightforward, easy access to the information you need.
+                <br><br>
+            Now, here's where it gets even more interesting. Whether you're on your laptop, tablet, or phone, you can use a simple curl command (or any code you're comfortable with) to interact directly with the site’s agent. This means you can pull information or perform actions on the site from any terminal, on any device, without the hassle of complex inputs or web scraping.
+                <br><br>
+            We believe that personal agents are the future. By calling a site's API directly, you can get the answers you need or interact with the site in the fastest, most cost-effective way possible. It's all about cutting out the unnecessary steps and giving you direct access to what you need, when you need it. Simple. Efficient. Powerful.
+                <br><br><br>
+            Explore our services👇 Always trying to improve, comments welcome.<br>
+            </p>
+                <p style="text-align: center;">+----------+</p>
+                
+                </p>           
+            </div>
+
+        <div id="chat-container" class="bg-gray-100 rounded-lg p-4 h-96 overflow-y-auto mb-4"></div>
+
+        <div class="flex">
+            <input type="text" id="message-input" class="flex-grow mr-2 px-2 py-1 border rounded" placeholder="Type your message...">
+            <button id="send-button" class="btn"><strong>Send it.</strong></button>
+        </div>
+
+        <div id="videoPlayer" class="video-container"></div>
+
+        <div class="button-container">
+            <button class="btn" onclick="loadVideo('dQw4w9WgXcQ')">LOAD_01.YT</button>
+            <button class="btn" onclick="loadVideo('jNQXAC9IVRw')">LOAD_02.YT</button>
+            <button class="btn" onclick="loadVideo('kJQP7kiw5Fk')">LOAD_03.YT</button>
+            <button class="btn" onclick="loadVideo('9bZkp7q19f0')">LOAD_04.YT</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        function loadVideo(videoId) {
+            const videoPlayer = document.getElementById('videoPlayer');
+            videoPlayer.innerHTML = `
+                <iframe width="100%" height="100%" 
+                        src="https://www.youtube.com/embed/${videoId}" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                </iframe>
+            `;
+        }
+
+        // Initialize with a default video
+        loadVideo('dQw4w9WgXcQ');
+    </script>
+</body>
+</html>
