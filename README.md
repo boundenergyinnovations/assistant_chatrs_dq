@@ -22,13 +22,8 @@ NEED: AWS account, OpenAI account, api key, assistant id. If using Google Sheets
 
 Start EC2/server with Ubuntu and settings for access to public HTTP/HTTPS, will need to set networking/VPC <-- video incomming.  
 
-Create dir:
-```sh
-mkdir chatrs
-cd chatrs
-```
 
-Run setup script:
+Copy and run setup script:
 ```sh
 sh <(curl https://raw.githubusercontent.com/boundenergyinnovations/assistant_chatrs_dq/main/setup_chatrs_server.sh || wget -O - https://raw.githubusercontent.com/boundenergyinnovations/assistant_chatrs_dq/main/setup_chatrs_server.sh)
 ```
